@@ -26,8 +26,8 @@ describe('App UI', () => {
     const user = userEvent.setup();
     render(<App />);
 
-    // Input is labelled by "Add a task"
-    const input = screen.getByLabelText(/add a task/i);
+    // Query the textbox uniquely by role and accessible name from the label "Add a task"
+    const input = screen.getByRole('textbox', { name: /add a task/i });
     expect(input).toBeInTheDocument();
 
     // Type 'Buy milk' and click Add
