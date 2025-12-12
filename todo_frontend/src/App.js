@@ -9,7 +9,13 @@ import TodoList from "./components/TodoList";
 
 // PUBLIC_INTERFACE
 function App() {
-  /** Main app component wiring hooks to UI components. */
+  /**
+   * Main app component wiring hooks to UI components.
+   * Theme and layout adhere to the "Ocean Professional" design:
+   * - Clean surface panels with rounded corners
+   * - Blue primary accents and amber highlights
+   * - Subtle shadows and smooth transitions
+   */
   const { theme, toggleTheme } = useTheme();
   const {
     tasks,
@@ -33,11 +39,13 @@ function App() {
         <Header theme={theme} onToggleTheme={toggleTheme} total={totalCount} active={activeCount} />
 
         <main className="main-panel" role="main">
-          <section className="panel card">
+          {/* Input + Filters Panel (Ocean surface card) */}
+          <section className="panel card" aria-label="Add tasks and refine list">
             <TodoInput
-              onAdd={(title) => {
+              onAdd={(payload) => {
                 // Hook currently supports only title; ignore dueDate for now
-                addTodo(title);
+                const title = typeof payload === "string" ? payload : payload?.title;
+                if (title) addTodo(title);
               }}
             />
             <Filters
@@ -48,15 +56,21 @@ function App() {
             />
           </section>
 
-          <section className="panel card">
-            <TodoList items={tasks} onToggle={toggleTodo} onUpdate={updateTodo} onDelete={deleteTodo} />
+          {/* Tasks Panel (Ocean surface card) */}
+          <section className="panel card" aria-label="Task list">
+            <TodoList
+              items={tasks}
+              onToggle={toggleTodo}
+              onUpdate={updateTodo}
+              onDelete={deleteTodo}
+            />
             <div className="list-footer">
               <button
                 type="button"
                 className="btn btn-ghost"
                 onClick={clearCompleted}
                 aria-label="Clear completed tasks"
-                title="Clear completed"
+                title="Clear completed tasks"
               >
                 Clear Completed
               </button>
@@ -65,14 +79,9 @@ function App() {
         </main>
 
         <footer className="app-footer" role="contentinfo">
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <span className="App-link" aria-label="Ocean Professional theme applied">
+            Ocean Professional theme
+          </span>
         </footer>
       </div>
     </div>

@@ -36,8 +36,9 @@
 
 .App {
   min-height: 100vh;
-  background: radial-gradient(1200px 700px at 80% -20%, rgba(37,99,235,0.08), transparent),
-              linear-gradient(to bottom, rgba(37,99,235,0.06), transparent 200px);
+  /* Subtle gradient accents per Ocean Professional */
+  background: radial-gradient(1200px 700px at 80% -20%, rgba(37,99,235,0.06), transparent),
+              linear-gradient(to bottom, rgba(37,99,235,0.05), transparent 200px);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease, background 0.3s ease;
@@ -344,6 +345,10 @@
 }
 
 .App-link {
-  color: var(--ocean-primary);
+  color: var(--text-secondary);
   text-decoration: none;
+  transition: color 0.2s ease;
+}
+.App-link:hover {
+  color: var(--ocean-primary);
 }
