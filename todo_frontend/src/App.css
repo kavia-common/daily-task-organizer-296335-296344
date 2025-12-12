@@ -1,104 +1,349 @@
-/* CSS Variables for Theme Management */
+/* CSS Variables for Theme Management and Ocean Professional palette */
 :root {
+  --ocean-primary: #2563EB;
+  --ocean-amber: #F59E0B;
+  --ocean-success: #F59E0B;
+  --ocean-error: #EF4444;
+
   /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
+  --bg-primary: #f9fafb;
+  --bg-secondary: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+  --button-bg: var(--ocean-primary);
   --button-text: #ffffff;
+  --shadow: 0 8px 24px rgba(0,0,0,0.08);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --ring: 0 0 0 3px rgba(37,99,235,0.2);
+  --surface: #ffffff;
 }
 
 [data-theme="dark"] {
   /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
+  --bg-primary: #0f172a;
+  --bg-secondary: #111827;
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --border-color: #1f2937;
+  --button-bg: #1d4ed8;
   --button-text: #ffffff;
+  --shadow: 0 8px 24px rgba(0,0,0,0.4);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.35);
+  --ring: 0 0 0 3px rgba(37,99,235,0.35);
+  --surface: #0b1220;
 }
 
 .App {
-  text-align: center;
+  min-height: 100vh;
+  background: radial-gradient(1200px 700px at 80% -20%, rgba(37,99,235,0.08), transparent),
+              linear-gradient(to bottom, rgba(37,99,235,0.06), transparent 200px);
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, background 0.3s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.viewport {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.app-header-bar {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.app-header-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #92400e;
+  background: #FEF3C7;
+  border: 1px solid #FDE68A;
+}
+
+.badge-amber {
+  color: #92400e;
+  background: #FEF3C7;
+  border-color: #FDE68A;
+}
+
+.app-header-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.task-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.counter-dot {
+  color: var(--ocean-amber);
+}
+
+.theme-toggle-compact.btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 36px;
+  width: 36px;
+  padding: 0;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-toggle-compact.btn:focus {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+.main-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.panel.card {
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+.todo-input-panel .field-group + .field-group {
+  margin-top: 10px;
+}
+
+.field-label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.field-row {
+  display: flex;
+  gap: 10px;
+}
+
+.input {
+  background: var(--bg-secondary);
   color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px 12px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.input.control-lg {
+  flex: 1;
+  font-size: 16px;
+}
+
+.input.search {
+  width: 240px;
+}
+
+.input.edit {
+  width: 100%;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--ocean-primary);
+  box-shadow: var(--ring);
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 700;
+  transition: transform 0.08s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-large {
+  padding: 12px 18px;
+}
+
+.btn-primary {
+  background: var(--button-bg);
+  color: var(--button-text);
+  box-shadow: 0 6px 22px rgba(37,99,235,0.35);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.filters-toolbar {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.segmented {
+  display: inline-flex;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.seg-btn {
+  background: transparent;
+  border: none;
+  padding: 8px 14px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.seg-btn.active {
+  background: linear-gradient(to bottom right, rgba(37,99,235,0.15), rgba(37,99,235,0.05));
+  color: var(--text-primary);
+}
+
+.search-wrap {
+  display: inline-flex;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.todo-item .todo-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  border-radius: 12px;
+}
+
+.todo-item.completed .todo-title {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.todo-card .left {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-title {
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+}
+
+.actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.icon-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  height: 34px;
+  width: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.icon-btn.danger {
+  color: var(--ocean-error);
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.icon-btn:focus {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+.list-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.empty-state {
+  padding: 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px dashed var(--border-color);
+  border-radius: 12px;
+}
+
+.help-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.app-footer {
+  margin-top: 18px;
+  text-align: center;
 }
 
 .App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
-}
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
-}
-
-.theme-toggle:active {
-  transform: translateY(0);
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+  color: var(--ocean-primary);
+  text-decoration: none;
 }
